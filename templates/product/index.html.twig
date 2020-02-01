@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listados de Productos{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+
+    <h2>Listados de Productos✅</h2>
+    <table>
+
+    	<tr>
+    			<th>Nombre</th>
+    			<th>Código</th>
+    			<th>Descripción</th>
+    			<th>Precio</th>
+    			<th>Acciones</th>   			
+
+    	 </tr>
+
+    	 {% for products in products %}
+
+    	 	<tr>
+    			<td>{{ products.name }}</td>
+    			<td>{{ products.code}}</td>
+    			<td>{{ products.description}}</td>
+    			<td>{{ products.precio}}</td>
+    			
+    			<td class="buttons">
+
+    				<a href="{{path('product_detail', {'id':products.id}) }}" class="btn-show">Ver</a>
+    				<a href="" class="btn-edit">Editar</a>
+    				<a href="" class="btn-delete">Eliminar</a>
+
+    			</td>
+    			
+    	 </tr>
+
+
+    	 {% endfor %}
+
+    </table>
+
+   
+</div>
+{% endblock %}

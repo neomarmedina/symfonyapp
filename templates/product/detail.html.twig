@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listados de Productos{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+
+    <h2>Listados de Productos✅</h2>
+    <h3>{{product.name}}</h3>
+
+
+    <p class="data-task">
+        {{product.category.name}}{{" "}}{{" "}}{{product.name}}{{ " - "}}{{"Codigo : "}}{{product.code}}{{ " - "}}{{ " Precio "}}{{product.precio}}{{" - "}}{{product.description}}
+
+    </p>
+   
+
+    <p>
+        {{product.name}}
+
+    </p>
+   
+
+   
+</div>
+{% endblock %}

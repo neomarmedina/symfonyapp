@@ -1,0 +1,38 @@
+products:
+    path: /
+    controller: App\Controller\ProductController::index
+
+
+product_detail:
+    path: /producto/{id}
+    controller: App\Controller\ProductController::detail    
+
+
+producto:
+    path: producto
+    controller: App\Controller\ProductController::index
+
+
+product_creation:
+    path: /producto-nuevo
+    controller: App\Controller\ProductController::creation    
+
+
+
+register:
+    path: /registro
+    controller: App\Controller\CategoryController::register
+
+category:
+    path: /category/{name}/{description}
+    controller: App\Controller\HomeController::category
+    defaults: { name : 'Tecnología', description: 'Productos de computos y telefonía'}
+    methods: [POST,GET]
+    requirements:
+      name: '[a-zA-Z ]+'
+      description: '[a-zA-Z ]+'
+
+
+redirect:
+    path: /redirection
+    controller: App\Controller\HomeController::redirection

@@ -1,0 +1,42 @@
+{% extends 'layouts/master.html.twig' %}
+
+{% block titulo %}   Categoría {% endblock %}
+
+{% block cabecera %}
+	{{parent() }}
+	<h2> {{title}} <h2>
+
+
+{% endblock %}
+
+
+{% block contenido %}
+
+	{#	
+
+	<h1>{{title}} </h1>
+	<h2>El Nombre de la categoría es : {{name}}</h2>
+	<h3>La descripción es : {{description}}</h3>
+	#}
+
+	{# creación de variables #}
+
+	{% set perro='criollo' %}
+
+	<h4>{{perro}}</h4>
+
+
+	{# trabajar con arrays #}
+
+	{{ dump(category) }}
+
+	{{ category[0] }}
+
+
+
+
+
+
+
+
+{% endblock %}
