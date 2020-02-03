@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Category;
 use App\Form\RegisterType;
 
+//use Symfony\Component\Security\Core\Category\CategoryInterface;//probando si funciona la interfaz
+
 
 class CategoryController extends AbstractController
 {

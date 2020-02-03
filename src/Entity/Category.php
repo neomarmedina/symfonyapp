@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayColecction;
 use Doctrine\Common\Collections\Colecction;
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Category\CategoryInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -15,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Category
+class Category implements CategoryInterface
 {
     /**
      * @var int
@@ -157,6 +156,10 @@ class Category
         return $this->products;
 
     }
+
+    //Esta función la agregue para que pueda funcionar la parte de  seguridad y credenciales y la librería de interfeces
+    public function eraseCredentials(){}
+
 
 
 

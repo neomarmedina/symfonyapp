@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\ProductType;
+use Symfony\Component\Security\Core\Category\CategoryInterface;
+
 
 class ProductController extends AbstractController
 {
@@ -82,7 +84,9 @@ class ProductController extends AbstractController
 
     }
 
+//Hay que agreagr esa línea de codigo como argumento a lado del $request
 
+//, \Symfony\Component\Security\Core\CategoryInterface $category
     public function creation(Request $request)
     {
         
@@ -97,16 +101,13 @@ class ProductController extends AbstractController
             if($form->isSubmitted() && $form->isValid())
              {
 
-                var_dump($product);//aqui verifico los datos que vienen del formulario
+                //var_dump($product);//aqui verifico los datos que vienen del formulario
+                var_dump($category);//aqui verifico los datos que vienen del formulario
+
 
              }   
 
-
-
-
-
              //Aqui sacaré todas las categorias que en la bd
-
 
 
              $category_repo = $this->getDoctrine()->getRepository(Category::class);         
