@@ -4,7 +4,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayColecction;
 use Doctrine\Common\Collections\Colecction;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Category\CategoryInterface;
+
+
+
+//use Symfony\Component\Security\Core\Category\CategoryInterface;// Esta la agregue para gestionar el envio de parametro seguro.
+
+
+
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -14,7 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Category implements CategoryInterface
+//class Category implements CategoryInterface
+class Category 
 {
     /**
      * @var int
@@ -157,7 +165,7 @@ class Category implements CategoryInterface
 
     }
 
-    //Esta función la agregue para que pueda funcionar la parte de  seguridad y credenciales y la librería de interfeces
+    //Esta función la agregue para que pueda funcionar la parte de  seguridad y credenciales y la librería de interfaces
     public function eraseCredentials(){}
 
 

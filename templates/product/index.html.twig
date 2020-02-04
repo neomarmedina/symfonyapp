@@ -27,11 +27,11 @@
     			<td>{{ products.description}}</td>
     			<td>{{ products.precio}}</td>
     			
-    			<td class="buttons">
+    			<td width="100%" class="buttons">
 
     				<a href="{{path('product_detail', {'id':products.id}) }}" class="btn-show">Ver</a>
-    				<a href="" class="btn-edit">Editar</a>
-    				<a href="" class="btn-delete">Eliminar</a>
+    				<a  href="{{path('product_edit', {'id':products.id}) }}" class="btn-edit">Editar</a>
+    				<a href="{{path('product_delete', {'id':products.id}) }}" class="btn-delete">Borrar</a>
 
     			</td>
     			

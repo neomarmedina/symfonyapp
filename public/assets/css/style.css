@@ -160,7 +160,11 @@ table td{
 
 
 
+.buttons{
 
+	width: 60%;
+
+}
 .buttons .btn-edit{
 
 	background: orange;
@@ -172,6 +176,12 @@ table td{
 
 	background: red; 
 	border-color: #930606; 
+
+}
+.buttons .status{
+
+	background: #8B8C7A; 
+	border-color: #8B8C7A; 
 
 }
 

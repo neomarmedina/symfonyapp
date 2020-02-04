@@ -1,3 +1,7 @@
+categories:
+    path: /categoria
+    controller: App\Controller\CategoryController::index
+
 products:
     path: /
     controller: App\Controller\ProductController::index
@@ -7,6 +11,10 @@ product_detail:
     path: /producto/{id}
     controller: App\Controller\ProductController::detail    
 
+category_detail:
+    path: /category/{id}
+    controller: App\Controller\CategoryController::detail    
+
 
 producto:
     path: producto
@@ -15,23 +23,29 @@ producto:
 
 product_creation:
     path: /producto-nuevo
-    controller: App\Controller\ProductController::creation    
+    controller: App\Controller\ProductController::creation 
 
 
+category_edit:
+    path: /editar-categoria/{id}
+    controller: App\Controller\categoryController::edit          
+
+
+product_edit:
+    path: /editar-producto/{id}
+    controller: App\Controller\ProductController::edit          
+
+product_delete:
+    path: /borrar/producto/{id}
+    controller: App\Controller\ProductController::delete 
+
+category_delete:
+    path: /borrar/categoria/{id}
+    controller: App\Controller\CategoryController::delete        
 
 register:
     path: /registro
     controller: App\Controller\CategoryController::register
-
-category:
-    path: /category/{name}/{description}
-    controller: App\Controller\HomeController::category
-    defaults: { name : 'Tecnología', description: 'Productos de computos y telefonía'}
-    methods: [POST,GET]
-    requirements:
-      name: '[a-zA-Z ]+'
-      description: '[a-zA-Z ]+'
-
 
 redirect:
     path: /redirection

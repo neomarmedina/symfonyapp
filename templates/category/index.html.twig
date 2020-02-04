@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listados de Productos{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+
+    <h2>Listados de Categorías✅</h2>
+    <table>
+
+    	<tr>
+    			<th>Nombre</th>
+    			<th>Código</th>
+    			<th>Descripción</th>
+                <th>Acciones</th>
+    			  			
+
+    	 </tr>
+
+    	 {% for categories in categories %}
+
+    	 	<tr>
+    			<td>{{ categories.name }}</td>
+    			<td>{{ categories.code}}</td>
+    			<td><textarea disabled>{{ categories.description}}</textarea></td>
+    			
+    			
+    			<td width="400%" class="buttons">
+
+    				<a href="{{path('category_detail', {'id':categories.id}) }}" class="btn-show">Ver</a>
+                    <a  href="{{path('category_edit', {'id':categories.id}) }}" class="btn-edit">Edit.</a>
+                    <a href="{{path('category_delete', {'id':categories.id}) }}" class="btn-delete">Borrar</a>
+                    <a href="" class="btn-status">
+
+
+                    {% if categories.activo ==1 %}                 
+                    {{ 'Act.' }}
+
+                    {% endif %}
+                    {% if categories.activo ==0 %}                 
+                    {{ 'Off.' }}
+
+                    {% endif %}
+
+                    </a>                    
+
+    	 </tr>
+
+
+    	 {% endfor %}
+
+    </table>
+
+   
+</div>
+{% endblock %}
+
+    {% block javascripts %}
+      
+        function alerta()
+    {
+    var mensaje;
+    var opcion = confirm("Clicka en Aceptar o Cancelar");
+    if (opcion == true) {
+        mensaje = "Has clickado OK";
+    } else {
+        mensaje = "Has clickado Cancelar";
+    }
+    document.getElementById("ejemplo").innerHTML = mensaje;
+}
+
+
+    {% endblock %}

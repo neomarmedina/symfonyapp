@@ -1,21 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Crear Producto{% endblock %}
+{% block title %}
+
+	{% if edit is defined %}
+
+		Editar Producto✅
+
+	{%else%}
+		Crear Producto✅	
+	
+	{%endif%}
+
+
+{% endblock %}
 
 {% block body %}
 
 
 <div class="example-wrapper">
+	<h2>	
 
-    <h2>Crear Producto✅</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+		{% if edit is defined %}
 
+			Editar Producto✅</h2>
+		
+		{%else%}
+		
+			<h2>Crear Producto✅</h2>	
+		
+		{%endif%}
 
+	    {{ form_start(form) }}
+	    {{ form_widget(form) }}
+	    {{ form_end(form) }}
+	<h2>	   
 
-    
-
-   
 </div>
 {% endblock %}

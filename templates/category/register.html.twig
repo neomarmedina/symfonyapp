@@ -1,14 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registro de Categoría{% endblock %}
+{% block title %}
+
+	{% if edit is defined %}
+
+		Editar Categoría✅
+
+	{%else%}
+		Registrar Categoría✅	
+	
+	{%endif%}
+
+
+{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h2>Registro de Categoría✅</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
 
-   
+
+<div class="example-wrapper">
+	<h2>	
+
+		{% if edit is defined %}
+
+			Editar Categoría✅</h2>
+		
+		{%else%}
+		
+			<h2>Crear Categoría✅</h2>	
+		
+		{%endif%}
+
+	    {{ form_start(form) }}
+	    {{ form_widget(form) }}
+    	{{ form_end(form) }}
+
+
+
+	<h2>	   
+
 </div>
 {% endblock %}
+

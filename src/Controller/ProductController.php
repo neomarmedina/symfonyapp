@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\ProductType;
-use Symfony\Component\Security\Core\Category\CategoryInterface;
-
 
 class ProductController extends AbstractController
 {
@@ -22,46 +20,23 @@ class ProductController extends AbstractController
 
     	// Aqui imprimo todas las categoŕía con su producto asociado
         $em = $this->getDoctrine()->getManager();
+
     	$product_repo = $this->getDoctrine()->getRepository(Product::class);//Aqui utilizo el repositorop de Repository
     	
-    	$products= $product_repo->findBy([], ['id'=>'DESC']); //Aqui obtengo todos Los productos y los puedo rrecorrer con un foreach
-        /*
     	
-        foreach ($products as $product)
-    	{
-    		//echo $product->getName()."<br/>";// Aqui imprimo el nombre de todos productos de la bd
-    		//echo $product->getCategory()->getName()."<br/>";
-            echo $product->getCategory()->getName().'= '.$product->getName()."<br/>";
-    	}
-        */
+
+
+        $products= $product_repo->findBy([], ['id'=>'DESC']); //Aqui obtengo todos Los 
         
-
-        //Aqui sacare todos las categorias que hay en la bd
-        /*
-          $category_repo = $this->getDoctrine()->getRepository(Category::class);         
-          $categories = $category_repo->findAll();//Aqui saco todos las categorias directamenet desde la tabla de Category
-
-
-          foreach ($categories as $categorie)
-        {
-            //echo $product->getName()."<br/>";// Aqui imprimo el nombre de todos productos de la bd
-            //echo $product->getCategory()->getName()."<br/>";
-           // echo "<h1>{$categorie->getName()}={$categorie->getDescription()}</h1>";
-        }
-        */
-
-
-
-
-
-        //Aqui sacaré todos los prodictos que hay adjunto a cada acategoria
-
+    //Aqui sacaré todos los prodictos que hay adjunto a cada acategoria
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
         ]);
     }
 
+
+    //En esta función muestro los detalles de un producto es específico
 
     public function detail(product $product)
     {
@@ -84,36 +59,42 @@ class ProductController extends AbstractController
 
     }
 
-//Hay que agreagr esa línea de codigo como argumento a lado del $request
 
-//, \Symfony\Component\Security\Core\CategoryInterface $category
     public function creation(Request $request)
     {
         
-
             $product= new Product();
             $form = $this->createForm(ProductType::class, $product);//aqui le pas el objeto $product para que dibuje el formulario
 
             $form->handleRequest($request);//uno lo que me llega por la petición del objeto
 
-            //Compruebo sin el formulario fue ennviado y si es valido
+            //Compruebo sin el formulario fue enviado y si es valido
 
             if($form->isSubmitted() && $form->isValid())
              {
 
                 //var_dump($product);//aqui verifico los datos que vienen del formulario
-                var_dump($category);//aqui verifico los datos que vienen del formulario
+
+                //Aqui cargo los datos que recibo de la vista (formulario) en un objeto para enviar a la bd (Guardo la categoría)
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+
+            //return $this->redirectToRoute('products');
+
+            //Esta es otra forma de redireccionar pasando (a la vista) por parametro el id del registro que se acaba de realizar 
+
+            return $this->redirect($this->generateUrl('product_detail',['id'=>$product->getId()]));
+
 
 
              }   
 
              //Aqui sacaré todas las categorias que en la bd
 
-
              $category_repo = $this->getDoctrine()->getRepository(Category::class);         
              $categories = $category_repo->findAll();//Aqui saco todos las categorias directamenet desde la tabla de Category
-
-
 
              //Desta forma le paso el formulariio a la vista para que se pueeda mostrar
 
@@ -121,15 +102,85 @@ class ProductController extends AbstractController
 
                 'form' => $form->createView()
 
-            ]);
-       
+            ]);      
 
     }
 
 
+       //Aqui creo la funcion para editar productos
+
+            public function edit(Request $request, product $product)
+            {
+        
+                    //var_dump($product);
+
+
+                   //Aqui renderiazamos una vista, y al mismo tiempo reutilzamos la vista creation y le pasamos varios (['edit'=> true]) para saber que estamos en la vista edit y no en la creación
 
 
 
+                $form = $this->createForm(ProductType::class, $product);//aqui le pas el objeto $product para que dibuje el formulario
+
+                $form->handleRequest($request);//uno lo que me llega por la petición del objeto
+
+                //Compruebo sin el formulario fue enviado y si es valido
+
+                if($form->isSubmitted() && $form->isValid())
+                 {
+
+                        //var_dump($product);//aqui verifico los datos que vienen del formulario
+
+                        //Aqui cargo los datos que recibo de la vista (formulario) en un objeto para enviar a la bd (Guardo la categoría)
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($product);
+                        $em->flush();
+
+                    //return $this->redirectToRoute('products');
+
+                    //Esta es otra forma de redireccionar pasando (a la vista) por parametro el id del registro que se acaba de realizar 
+
+                    return $this->redirect($this->generateUrl('product_detail',['id'=>$product->getId()]));
+
+
+                 }   
+
+               
+                    return $this->render('product/creation.html.twig', [
+                    'edit'=> true,
+                    'form'=> $form->createView()
+
+
+                    ]); 
+
+            } 
+
+            //Aqui creo la función Eliminar
+
+           public function delete(product $product)
+           {
+
+                if(!$product)
+                {
+
+                    return $this->redirectToRout('products');
+
+                }    
+
+                   $em = $this->getDoctrine()->getManager();
+                   $em->remove($product);// Aqui lo borre de getDoctrine
+                   $em->flush();//AQui lo borro de la base de datos
+
+                   //Luego que elimino el producto redireciono a Producto
+
+                   //return $this->redirectToRout('products');
+                   return $this->redirect($this->generateUrl('products'));
+
+
+
+           }
+   
+            
 
 
 
